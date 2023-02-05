@@ -1,5 +1,6 @@
 package com.application.Entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,7 +28,8 @@ public class Category {
   
   @NotNull(message = "Category's Name can not be null")
   @NotBlank(message = "Category's Name can not be blank")
-  private String catergoryName;
+  @Column(unique = true)
+  private String categoryName;
   
   @NotNull(message = "Description can not be null")
   @NotBlank(message = "Category's Description can not be blank")
