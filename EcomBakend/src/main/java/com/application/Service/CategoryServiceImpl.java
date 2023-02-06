@@ -28,7 +28,7 @@ public class CategoryServiceImpl implements CategoryService{
 
 	@Override
 	public Category getCategoryById(Integer id) throws CategoryException {
-	    Category category = categoryRepository.findById(id).orElseThrow(()-> new CategoryException("Category with id :"+id+"doesn't Exist"));
+	    Category category = categoryRepository.findById(id).orElseThrow(()-> new CategoryException("Category with id :"+id+" doesn't Exist"));
 		return category;
 	}
 
