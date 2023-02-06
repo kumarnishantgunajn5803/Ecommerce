@@ -16,12 +16,22 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 public class GlobalExceptionHandler {
      //user defined Exception
 
+	  //categoryException
     @ExceptionHandler(CategoryException.class)
-    public ResponseEntity<MyErrorDetails> userExceptionHandler(CategoryException ce, WebRequest req) {
+    public ResponseEntity<MyErrorDetails> categoryExceptionHandler(CategoryException ce, WebRequest req) {
 
         MyErrorDetails customizeErr = new MyErrorDetails(LocalDateTime.now(), ce.getMessage(), req.getDescription(false));
 
         return new ResponseEntity<MyErrorDetails>(customizeErr, HttpStatus.BAD_REQUEST);
+    }
+    
+    //productException
+    @ExceptionHandler(ProductException.class)
+    public ResponseEntity<MyErrorDetails> productExceptionHandler(ProductException ce, WebRequest req) {
+    	
+    	MyErrorDetails customizeErr = new MyErrorDetails(LocalDateTime.now(), ce.getMessage(), req.getDescription(false));
+    	
+    	return new ResponseEntity<MyErrorDetails>(customizeErr, HttpStatus.BAD_REQUEST);
     }
       
     //possible exception handlers:
