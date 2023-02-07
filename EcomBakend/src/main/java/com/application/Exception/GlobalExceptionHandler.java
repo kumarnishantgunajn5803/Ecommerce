@@ -34,6 +34,14 @@ public class GlobalExceptionHandler {
     	return new ResponseEntity<MyErrorDetails>(customizeErr, HttpStatus.BAD_REQUEST);
     }
       
+    @ExceptionHandler(CustomerException.class)
+    public ResponseEntity<MyErrorDetails> customerExceptionHandler(CustomerException ce, WebRequest req) {
+    	
+    	MyErrorDetails customizeErr = new MyErrorDetails(LocalDateTime.now(), ce.getMessage(), req.getDescription(false));
+    	
+    	return new ResponseEntity<MyErrorDetails>(customizeErr, HttpStatus.BAD_REQUEST);
+    }
+    
     //possible exception handlers:
 
     @ExceptionHandler(NoSuchMethodException.class)
