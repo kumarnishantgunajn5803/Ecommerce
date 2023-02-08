@@ -25,7 +25,7 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public Customer registerCustomer(Customer customer) throws CustomerException {
         Optional<Customer> existingOpt =   customerRepository.findByEmail(customer.getEmail());
-        if(existingOpt!=null) {
+        if(existingOpt.isPresent()) {
         	throw new CustomerException("Email already exists!!");
         	 
         }

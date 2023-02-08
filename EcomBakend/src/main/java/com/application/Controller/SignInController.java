@@ -15,14 +15,19 @@ import com.application.Repository.CustomerRepository;
 @RestController
 public class SignInController {
 	
-   @Autowired
+	@Autowired
 	private CustomerRepository customerRepository;
-   
-    @GetMapping("/signIn")
-	public ResponseEntity<Customer> getLoggedInUserDetailsHandler(Authentication auth ){
+	
+	@GetMapping("/signIn")
+	public ResponseEntity<Customer> getLoggedInCustomerDetailsHandler(Authentication auth){
 		
-		Customer registeredCustomer = customerRepository.findByEmail(auth.getName()).orElseThrow(()-> new BadCredentialsException("Invalid Credentials!"));
 		
-		return new ResponseEntity<Customer>(registeredCustomer, HttpStatus.OK);
-	}
+		 Customer customer= customerRepository.findByEmail(auth.getName()).orElseThrow(() -> new BadCredentialsException("Invalid Username or password"));
+		
+		 //to get the token in body, pass HttpServletResponse inside this method parameter 
+		// System.out.println(response.getHeaders(SecurityConstants.JWT_HEADER));
+		 
+		 
+		 return new ResponseEntity<>(customer, HttpStatus.ACCEPTED);
+ }
 }
