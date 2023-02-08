@@ -2,8 +2,7 @@ package com.application.Controller;
 
  
 import java.util.List;
-
-import javax.validation.Valid;
+ 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +20,8 @@ import com.application.Entities.Category;
  
 import com.application.Exception.CategoryException;
 import com.application.Service.CategoryService;
+
+import jakarta.validation.Valid;
  
  
 
@@ -62,7 +63,7 @@ public class CategoryController {
 
 	}
 	
-	@DeleteMapping("/category/{categoryId}")
+	@DeleteMapping("/category/delete/{categoryId}")
 	public ResponseEntity<Category> deleteCategory(@PathVariable("categoryId") Integer categoryId) throws CategoryException{
 
 		Category deletedCategory = categoryService.deleteCategory(categoryId);
