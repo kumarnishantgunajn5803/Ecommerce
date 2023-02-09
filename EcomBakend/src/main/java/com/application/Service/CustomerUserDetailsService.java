@@ -12,10 +12,10 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
+import org.springframework.stereotype.Service;
 import com.application.Entities.Customer;
 import com.application.Repository.CustomerRepository;
-
+@Service
 public class CustomerUserDetailsService implements UserDetailsService{
 	
 	@Autowired

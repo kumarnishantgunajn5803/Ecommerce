@@ -20,7 +20,13 @@ public class AppConfig {
 		.csrf().disable()
 		.authorizeHttpRequests()
 		.requestMatchers(HttpMethod.POST, "/user/register").permitAll()
-	     
+		
+		.requestMatchers(HttpMethod.GET, "/user/**").hasAnyRole("ADMIN","USER")
+		.requestMatchers(HttpMethod.GET, "/product/name/**").hasAnyRole("ADMIN","USER")
+		.requestMatchers(HttpMethod.PUT, "/user/update/**").hasAnyRole("ADMIN","USER")
+		.requestMatchers( "/category/**").hasRole("ADMIN")
+		.requestMatchers( "/product/**" ).hasRole("ADMIN")
+		.requestMatchers("/user/**").hasRole("ADMIN")
 		.anyRequest().authenticated().and()
 		.addFilterAfter(new JwtTokenGeneratorFilter(), BasicAuthenticationFilter.class)
 		.addFilterBefore(new JwtTokenValidatorFilter(), BasicAuthenticationFilter.class)
