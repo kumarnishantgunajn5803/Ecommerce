@@ -14,4 +14,5 @@ public interface WishListService {
   public List<WishList> showWishList() throws WishListException;
   
   public void deleteProductFromWishList(Integer productId)throws WishListException, ProductException;
+  
 }
