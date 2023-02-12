@@ -34,15 +34,15 @@ public class WishList {
 	private Integer wishListId;
 	
 	
-	  @OneToOne(targetEntity = Customer.class, fetch = FetchType.EAGER)
+	  @OneToOne( fetch = FetchType.EAGER)
 	  @JoinColumn(nullable = false, name = "customerId")
 	private Customer customer;
 	
 	
 	private Date createdDate;
 	
-	@ManyToOne()
-    @JoinColumn(name = "productId" , unique = true)
+	  @ManyToOne()
+    @JoinColumn(name = "productId" )
 	private Product product;
 	
    public WishList(Customer customer, Product product) {

@@ -36,16 +36,22 @@ public class WishListServiceImpl implements WishListService{
 	@Override
 	public void addProductToWishList(Integer productId) throws WishListException, ProductException {
 		 String username = JwtTokenValidatorFilter.currentUser;
+	
 		 
 		 Customer customer = customerRepository.findByEmail(username).get();
+	
+		Product product = productRepository.findById(productId).orElseThrow(()-> new ProductException("Product with id :"+productId+" doesn't exist!"));
+
+	 List<WishList> existingwishList = wishListRepository.findAllByCustomerOrderByCreatedDateDesc(customer);
+        for(WishList w:existingwishList) {
+        	if(w.getProduct().getProductId()==productId) {
+        		 throw new WishListException("Product has already been added to your Wishlist");        	}
+        }
+	      
+
 		 
-	Product product = productRepository.findById(productId).orElseThrow(()-> new ProductException("Product with id :"+productId+" doesn't exist!"));
-		
-	WishList existingwishList=	wishListRepository.findByProduct(product);
-	 if(existingwishList!=null) {
-		 throw new WishListException("Product has already been added to your Wishlist");
-	 }
-  
+	 
+	 
 	
 	   WishList wishList = new WishList(customer, product);
 	   wishListRepository.save(wishList);
@@ -72,9 +78,21 @@ public class WishListServiceImpl implements WishListService{
 
 	@Override
 	public void deleteProductFromWishList(Integer productId) throws WishListException, ProductException {
- 	Product product = productRepository.findById(productId).orElseThrow(()-> new ProductException("Product with id :"+productId+" doesn't exist!"));
-	  
-	WishList wishList=	wishListRepository.findByProduct(product);
+     String username = JwtTokenValidatorFilter.currentUser;
+	
+		 
+		 Customer customer = customerRepository.findByEmail(username).get();
+  List<WishList> existingwishList = wishListRepository.findAllByCustomerOrderByCreatedDateDesc(customer);
+  WishList wishList=null ;
+		  for(WishList w:existingwishList) {
+		  	if(w.getProduct().getProductId()==productId) {
+		  		wishList=w;
+		  		     }
+		  } 
+	if(wishList==null) {
+		throw new WishListException("product doesn't exist in your wishlist");
+	}
+	 
 		wishListRepository.delete(wishList);
 	}
 
