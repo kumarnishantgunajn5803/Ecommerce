@@ -16,6 +16,17 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 public class GlobalExceptionHandler {
 	
      //user defined Exception
+
+	//WishListException
+	  @ExceptionHandler(WishListException.class)
+	    public ResponseEntity<MyErrorDetails> wishListExceptionHandler(WishListException ce, WebRequest req) {
+
+	        MyErrorDetails customizeErr = new MyErrorDetails(LocalDateTime.now(), ce.getMessage(), req.getDescription(false));
+
+	        return new ResponseEntity<MyErrorDetails>(customizeErr, HttpStatus.BAD_REQUEST);
+	    }
+	
+	//category Exception
 	 
     @ExceptionHandler(CategoryException.class)
     public ResponseEntity<MyErrorDetails> categoryExceptionHandler(CategoryException ce, WebRequest req) {
