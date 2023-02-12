@@ -40,7 +40,13 @@ public class WishListServiceImpl implements WishListService{
 		 Customer customer = customerRepository.findByEmail(username).get();
 		 
 	Product product = productRepository.findById(productId).orElseThrow(()-> new ProductException("Product with id :"+productId+" doesn't exist!"));
-		 
+		
+	WishList existingwishList=	wishListRepository.findByProduct(product);
+	 if(existingwishList!=null) {
+		 throw new WishListException("Product has already been added to your Wishlist");
+	 }
+  
+	
 	   WishList wishList = new WishList(customer, product);
 	   wishListRepository.save(wishList);
 	
