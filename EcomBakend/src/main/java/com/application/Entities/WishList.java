@@ -42,7 +42,7 @@ public class WishList {
 	private Date createdDate;
 	
 	@ManyToOne()
-    @JoinColumn(name = "productId")
+    @JoinColumn(name = "productId" , unique = true)
 	private Product product;
 	
    public WishList(Customer customer, Product product) {
