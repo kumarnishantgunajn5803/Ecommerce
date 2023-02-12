@@ -18,7 +18,7 @@ public class GlobalExceptionHandler {
      //user defined Exception
 
 	//WishListException
-	  @ExceptionHandler(CategoryException.class)
+	  @ExceptionHandler(WishListException.class)
 	    public ResponseEntity<MyErrorDetails> wishListExceptionHandler(WishListException ce, WebRequest req) {
 
 	        MyErrorDetails customizeErr = new MyErrorDetails(LocalDateTime.now(), ce.getMessage(), req.getDescription(false));
