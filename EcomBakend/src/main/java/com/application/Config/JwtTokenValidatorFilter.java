@@ -26,7 +26,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class JwtTokenValidatorFilter extends OncePerRequestFilter{
-
+  public static String currentUser;
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -53,6 +53,7 @@ public class JwtTokenValidatorFilter extends OncePerRequestFilter{
 				
 				String username= String.valueOf(claims.get("username"));
 				
+				currentUser=username;
 				
 				String role= (String)claims.get("role");
 				
