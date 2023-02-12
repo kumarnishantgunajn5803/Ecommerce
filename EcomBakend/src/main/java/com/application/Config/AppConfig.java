@@ -9,8 +9,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
+@EnableWebMvc
 public class AppConfig {
 	@Bean
 	public SecurityFilterChain springSecurityConfiguration(HttpSecurity http)throws Exception {
@@ -19,8 +21,9 @@ public class AppConfig {
 		.and()
 		.csrf().disable()
 		.authorizeHttpRequests()
-		.requestMatchers(HttpMethod.POST, "/user/register").permitAll()
 		
+		.requestMatchers(HttpMethod.POST, "/user/register").permitAll()
+		.requestMatchers("/v3/api-docs").permitAll()
 		.requestMatchers(HttpMethod.GET, "/user/**").hasAnyRole("ADMIN","USER")
 		.requestMatchers(HttpMethod.GET, "/product/name/**").hasAnyRole("ADMIN","USER")
 		.requestMatchers(HttpMethod.PUT, "/user/update/**").hasAnyRole("ADMIN","USER")

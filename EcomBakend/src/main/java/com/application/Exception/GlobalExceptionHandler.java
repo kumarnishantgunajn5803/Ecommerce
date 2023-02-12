@@ -14,9 +14,9 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
+	
      //user defined Exception
-
-	  //categoryException
+	 
     @ExceptionHandler(CategoryException.class)
     public ResponseEntity<MyErrorDetails> categoryExceptionHandler(CategoryException ce, WebRequest req) {
 
