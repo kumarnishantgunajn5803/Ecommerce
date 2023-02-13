@@ -55,13 +55,18 @@ public class Product {
 	@NotBlank(message = "Image Url can not be blank")
     private String imageUrl;
 	
-	   @JsonIgnore
-	    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+	    @JsonIgnore
+	    @ManyToOne(fetch = FetchType.LAZY )
 	    @JoinColumn(name = "category_id", nullable = false)
 	    Category category;
 
 	    @JsonIgnore
 	    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
 	    private List<WishList> wishListList;
+	    
+	    
+	    @JsonIgnore
+	    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+	    private List<Cart> carts;
 
 }
