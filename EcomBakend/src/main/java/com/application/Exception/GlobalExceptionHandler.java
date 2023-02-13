@@ -16,6 +16,14 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 public class GlobalExceptionHandler {
 	
      //user defined Exception
+	//cartException
+	 @ExceptionHandler(CartException.class)
+	    public ResponseEntity<MyErrorDetails> cartExceptionHandler(CartException ce, WebRequest req) {
+
+	        MyErrorDetails customizeErr = new MyErrorDetails(LocalDateTime.now(), ce.getMessage(), req.getDescription(false));
+
+	        return new ResponseEntity<MyErrorDetails>(customizeErr, HttpStatus.BAD_REQUEST);
+	    }
 
 	//WishListException
 	  @ExceptionHandler(WishListException.class)
