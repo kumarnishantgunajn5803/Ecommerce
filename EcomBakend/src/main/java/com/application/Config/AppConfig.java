@@ -26,8 +26,8 @@ public class AppConfig {
 		.requestMatchers("/v3/api-docs").permitAll()
 		.requestMatchers(HttpMethod.GET, "/user/**").hasAnyRole("ADMIN","USER")
 		.requestMatchers(HttpMethod.GET, "/wishList/**").hasAnyRole("ADMIN","USER")
-
-		.requestMatchers(HttpMethod.GET, "/product/name/**").hasAnyRole("ADMIN","USER")
+		.requestMatchers(HttpMethod.GET, "/cart/**").hasAnyRole("ADMIN","USER")
+         .requestMatchers(HttpMethod.GET, "/product/name/**").hasAnyRole("ADMIN","USER")
 		.requestMatchers(HttpMethod.PUT, "/user/update/**").hasAnyRole("ADMIN","USER")
 		.requestMatchers( "/category/**").hasRole("ADMIN")
 		.requestMatchers( "/product/**" ).hasRole("ADMIN")

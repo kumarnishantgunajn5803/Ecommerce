@@ -5,6 +5,7 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -33,7 +34,7 @@ public class Cart {
    
    private Date createdDate;
    
-   @ManyToOne
+   @ManyToOne( )
    @JoinColumn(name = "product_id", referencedColumnName = "productId")
    private Product product;
    

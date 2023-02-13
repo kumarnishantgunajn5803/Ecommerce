@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -61,12 +62,12 @@ public class Product {
 	    Category category;
 
 	    @JsonIgnore
-	    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+	    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product"  )
 	    private List<WishList> wishListList;
 	    
 	    
 	    @JsonIgnore
-	    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+	    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product"  )
 	    private List<Cart> carts;
 
 }

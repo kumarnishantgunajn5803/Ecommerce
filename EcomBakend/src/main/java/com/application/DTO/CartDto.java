@@ -1,23 +1,55 @@
 package com.application.DTO;
 
-import jakarta.validation.constraints.Min;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
+ 
 public class CartDto {
 	
 	
   private Integer cartId;
-  @Min(value = 1,message = "ProductId can not be less than 1.")
+  
   private Integer productId;
-  @Min(value = 1,message = "Product quantity can not be less than 1.")
+  
   private Integer quantity;
+
+public Integer getCartId() {
+	return cartId;
+}
+
+public void setCartId(Integer cartId) {
+	this.cartId = cartId;
+}
+
+public int getProductId() {
+	return productId;
+}
+
+public void setProductId(int productId) {
+	this.productId = productId;
+}
+
+public int getQuantity() {
+	return quantity;
+}
+
+public void setQuantity(int quantity) {
+	this.quantity = quantity;
+}
+
+public CartDto(Integer cartId, int productId, int quantity) {
+	super();
+	this.cartId = cartId;
+	this.productId = productId;
+	this.quantity = quantity;
+}
+
+public CartDto() {
+	super();
+	// TODO Auto-generated constructor stub
+}
+
+@Override
+public String toString() {
+	return "CartDto [cartId=" + cartId + ", productId=" + productId + ", quantity=" + quantity + "]";
+}
+  
+  
 }

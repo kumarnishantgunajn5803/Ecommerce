@@ -15,4 +15,6 @@ public interface CartService {
    
    public void deleteCartItem(Integer cartId) throws CartException;
    
+   public CartItemDto updateCart(Integer cartId , Integer quantity)throws CartException;
+   
 }

@@ -1,10 +1,8 @@
 package com.application.Entities;
 
 import java.util.Date;
- 
 
- 
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -41,7 +39,7 @@ public class WishList {
 	
 	private Date createdDate;
 	
-	  @ManyToOne()
+	  @ManyToOne( )
     @JoinColumn(name = "productId" )
 	private Product product;
 	
