@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.application.Common.ApiResponse;
+import com.application.DTO.CartDisplayDto;
 import com.application.DTO.CartDto;
 import com.application.DTO.CartItemDto;
 import com.application.Service.CartService;
@@ -38,12 +39,12 @@ public class CartController {
 	}
 	
 	@GetMapping("/")
-	public ResponseEntity<List<CartItemDto>> getCartListHandler( ){
+	public ResponseEntity<CartDisplayDto> getCartListHandler( ){
 	  
-		List<CartItemDto> cartItemDtos =    cartService.getListOfCartItem();
+		CartDisplayDto cart =    cartService.getListOfCartItem();
 	 
 		
-		return new ResponseEntity<List<CartItemDto>>(cartItemDtos, HttpStatus.OK);
+		return new ResponseEntity<CartDisplayDto>(cart, HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{cartId}")
