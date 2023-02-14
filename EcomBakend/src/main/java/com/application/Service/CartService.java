@@ -2,6 +2,7 @@ package com.application.Service;
 
 import java.util.List;
 
+import com.application.DTO.CartDisplayDto;
 import com.application.DTO.CartDto;
 import com.application.DTO.CartItemDto;
 import com.application.Exception.CartException;
@@ -11,7 +12,7 @@ public interface CartService {
 	
    public void addToCart(CartDto cartDto) throws ProductException, CartException;
    
-   public List<CartItemDto> getListOfCartItem()throws CartException;
+   public CartDisplayDto getListOfCartItem()throws CartException;
    
    public void deleteCartItem(Integer cartId) throws CartException;
    

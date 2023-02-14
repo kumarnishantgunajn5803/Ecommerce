@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.application.Config.JwtTokenValidatorFilter;
+import com.application.DTO.CartDisplayDto;
 import com.application.DTO.CartDto;
 import com.application.DTO.CartItemDto;
 import com.application.DTO.ProductDto;
@@ -61,7 +62,7 @@ public class CartServiceImpl implements CartService{
 	}
 
 	@Override
-	public List<CartItemDto> getListOfCartItem() throws CartException {
+	public CartDisplayDto getListOfCartItem() throws CartException {
 		  String username = JwtTokenValidatorFilter.currentUser;
 			
 			 
@@ -77,7 +78,16 @@ public class CartServiceImpl implements CartService{
  		cartItemDto.setQuantity(c.getQuantity());
  		cartItemDtos.add(cartItemDto);
  	 }
- 	 return cartItemDtos;
+ 	 double totalCost =0;
+ 	 
+ 	 for(CartItemDto c:cartItemDtos) {
+ 		 totalCost += c.getProductDto().getProductPrice()*c.getQuantity();
+ 	 }
+ 	CartDisplayDto cartDisplayDto = new CartDisplayDto();
+ 	cartDisplayDto.setCartItems(cartItemDtos);
+ 	cartDisplayDto.setTotalCost(totalCost);
+ 	
+ 	 return cartDisplayDto;
 	}
 
 	@Override
@@ -115,7 +125,7 @@ public class CartServiceImpl implements CartService{
 	public CartItemDto updateCart( Integer cartId , Integer quantity) throws CartException {
 		Cart cart = cartRepository.findById(cartId).orElseThrow(()-> new CartException("cart doesn't exists")); 
 		cart.setQuantity(quantity);
-		
+		 
 	  Cart c =	cartRepository.save(cart);
 	  
 	  CartItemDto cartItemDto = new CartItemDto();
