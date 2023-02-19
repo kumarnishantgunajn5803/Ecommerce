@@ -10,12 +10,23 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
+import com.application.Entities.OrderDetail;
+
  
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
 	
      //user defined Exception
+	//cartException
+		 @ExceptionHandler(OrderException.class)
+		    public ResponseEntity<MyErrorDetails> cartExceptionHandler(OrderException ce, WebRequest req) {
+
+		        MyErrorDetails customizeErr = new MyErrorDetails(LocalDateTime.now(), ce.getMessage(), req.getDescription(false));
+
+		        return new ResponseEntity<MyErrorDetails>(customizeErr, HttpStatus.BAD_REQUEST);
+		    }
+	
 	//cartException
 	 @ExceptionHandler(CartException.class)
 	    public ResponseEntity<MyErrorDetails> cartExceptionHandler(CartException ce, WebRequest req) {
