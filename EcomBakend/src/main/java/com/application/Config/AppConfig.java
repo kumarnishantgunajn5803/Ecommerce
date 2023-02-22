@@ -14,6 +14,13 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @Configuration
 @EnableWebMvc
 public class AppConfig {
+	public static final String[]  Public_Url = {
+			"/v3/api-docs",
+			"/v2/api-docs",
+			"/swagger-resources/**",
+			"/swagger-ui/**",
+			"/webjars/**"
+	};
 	@Bean
 	public SecurityFilterChain springSecurityConfiguration(HttpSecurity http)throws Exception {
 		
@@ -21,9 +28,9 @@ public class AppConfig {
 		.and()
 		.csrf().disable()
 		.authorizeHttpRequests()
-		
+		.requestMatchers(Public_Url).permitAll()
 		.requestMatchers(HttpMethod.POST, "/user/register").permitAll()
-		.requestMatchers("/v3/api-docs").permitAll()
+		
 		.requestMatchers(HttpMethod.GET, "/user/**").hasAnyRole("ADMIN","USER")
 		.requestMatchers(HttpMethod.GET, "/placeOrder/**").hasAnyRole("ADMIN","USER")
 		.requestMatchers(HttpMethod.GET, "/wishList/**").hasAnyRole("ADMIN","USER")
